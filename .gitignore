@@ -1,0 +1,29 @@
+# Byte-compiled / optimized files
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE / Editor configuration
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Operating System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary audio uploads (ignore uploaded files, keep sample_meeting.mp3)
+data/audio/*
+!data/audio/sample_meeting.mp3

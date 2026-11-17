@@ -1,0 +1,20 @@
+### Q1: What is the fundamental difference between Extractive and Abstractive Summarization?
+> **Answer**:
+> - **Extractive summarization** identifies and extracts salient sentences verbatim from the input document based on sentence scoring (e.g., TF-IDF, TextRank). It acts like a digital highlighter. It has zero risk of factual hallucination.
+> - **Abstractive summarization** interprets the source document and generates entirely new sentences using an encoder-decoder language model (e.g., BART, T5). It acts like a human reading a document and writing an executive summary in their own words.
+
+### Q2: How does TF-IDF score sentence importance?
+> **Answer**:
+> - **Term Frequency (TF)** measures how often a word appears in a specific sentence.
+> - **Inverse Document Frequency (IDF)** measures how rare or informative that word is across all sentences in the transcript.
+> - By multiplying TF $\times$ IDF, frequent generic words receive low scores, while domain-specific terms (e.g., *"migration"*, *"authentication"*, *"deadline"*) receive high scores. Summing the word weights for each sentence yields a salience score for ranking.
+
+### Q3: Why did you use two different preprocessing pipelines for TF-IDF and BART?
+> **Answer**:
+> - Traditional TF-IDF benefits from lowercasing, stopword removal, and lemmatization to compress vocabulary and reduce sparsity in the count matrix.
+> - Deep learning models like BART use self-attention mechanisms that require full grammatical syntax, punctuation, and capitalization to understand semantics. Stripping stopwords or lemmatizing would destroy the model's ability to generate coherent English.
+
+### Q4: Why select `sshleifer/distilbart-cnn-12-6` instead of `facebook/bart-large-cnn`?
+> **Answer**:
+> - `bart-large-cnn` has over 400M parameters and requires ~1.6 GB RAM, leading to slower CPU inference (~45-60s).
+> - `distilbart-cnn-12-6` is a student model distilled from the larger teacher. It reduces parameter count and RAM (~600 MB) while preserving ~95% of summarization quality, providing a 2-3x speedup on local consumer CPUs.
